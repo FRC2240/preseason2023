@@ -11,5 +11,5 @@ private:
     int m_lowerLimit;
     int m_upperLimit;
 //Needs one motor
-    WPI_TalonFX m_motor{0};
+    WPI_TalonFX m_motor_climber{0};
 };
