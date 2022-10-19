@@ -10,7 +10,9 @@
 #include <frc/smartdashboard/SendableChooser.h>
 #include <frc/XboxController.h>
 
+
 frc::XboxController m_stick{0};
+
 
 
 
@@ -26,6 +28,8 @@ class Robot : public frc::TimedRobot {
   void DisabledPeriodic() override;
   void TestInit() override;
   void TestPeriodic() override;
+  void SimulationInit() override;
+  void SimulationPeriodic() override;
 
  private:
   frc::SendableChooser<std::string> m_chooser;

@@ -1,3 +1,4 @@
+
    #include "ctre/Phonix.h"
 
   class Grabber {
@@ -9,6 +10,8 @@
   private:
       bool m_raised;
       bool m_lowered; 
-      WPI_TalonFX m_motor{7};
 
-  }
+//Needs 1 motor
+    WPI_TalonFX m_motor_grabber{7}; 
+};
+

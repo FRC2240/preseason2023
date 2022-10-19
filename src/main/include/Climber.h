@@ -1,4 +1,6 @@
-class Climber{
+
+#include "ctre/Phoenix.h"
+class Climber {
 
 public:
     void Up();
@@ -8,8 +10,6 @@ public:
 private: 
     int m_lowerLimit;
     int m_upperLimit;
-
-  //Needs 1 motor
-   WPI_Talon m_motor{0}
-
-}
+    
+    WPI_TalonFX m_motor_climber{0};
+};
