@@ -10,5 +10,5 @@ class Grabber {
         bool m_raised;
         bool m_lowered;
 //Needs 1 motor
-    WPI_TalonFX m_motor{7}; 
+    WPI_TalonFX m_motor_grabber{7}; 
 };
