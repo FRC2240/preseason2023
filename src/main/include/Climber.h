@@ -1,5 +1,5 @@
-#include "ctre/Phoenix.h"
 
+#include "ctre/Phoenix.h"
 class Climber {
 
 public:
@@ -7,9 +7,9 @@ public:
     void Down();
     void Stop();
 
-private:
+private: 
     int m_lowerLimit;
     int m_upperLimit;
-//Needs one motor
+    
     WPI_TalonFX m_motor_climber{0};
 };
