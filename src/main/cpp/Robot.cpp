@@ -4,9 +4,12 @@
 
 #include "Robot.h"
 
+
 #include <fmt/core.h>
 
 #include <frc/smartdashboard/SmartDashboard.h>
+
+
 
 void Robot::RobotInit() {
   m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
@@ -62,6 +65,13 @@ void Robot::TeleopInit() {
 }
 
 void Robot::TeleopPeriodic() {
+ if (m_stick.GetYButton()){
+    m_elevator.Up();
+  }
+
+  if (m_stick.GetAButton()) {
+    m_elevator.Down();
+  } 
 
   
 }
