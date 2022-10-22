@@ -1,8 +1,7 @@
+#include "ctre/Phoenix.h"
 
-   #include "ctre/Phoenix.h"
-
-  class Grabber {
-    public:
+class Grabber {
+public:
        void Up();
        void Down();
        void In();

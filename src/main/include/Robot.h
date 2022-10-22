@@ -9,15 +9,12 @@
 #include <frc/TimedRobot.h>
 #include <frc/smartdashboard/SendableChooser.h>
 #include <frc/XboxController.h>
-
+#include "Elevator.h"
 
 frc::XboxController m_stick{0};
 
-
-
-
 class Robot : public frc::TimedRobot {
-public:
+ public:
   void RobotInit() override;
   void RobotPeriodic() override;
   void AutonomousInit() override;
@@ -31,9 +28,12 @@ public:
   void SimulationInit() override;
   void SimulationPeriodic() override;
 
-private:
+
+ private:
   frc::SendableChooser<std::string> m_chooser;
   const std::string kAutoNameDefault = "Default";
   const std::string kAutoNameCustom = "My Auto";
   std::string m_autoSelected;
+
+ Elevator m_elevator;
 };
