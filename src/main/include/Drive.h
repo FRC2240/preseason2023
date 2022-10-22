@@ -1,11 +1,14 @@
+#include "ctre/Phoenix.h"
+
 class Drive{
 
-public
+public:
    void Forward();
    void Backward();
    void Right();
    void Left();
-private
+
+private:
 //Needs four motors
     WPI_TalonFX m_motor_front_left{1};
     WPI_TalonFX m_motor_front_right{2};
