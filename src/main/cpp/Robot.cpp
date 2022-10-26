@@ -65,15 +65,18 @@ void Robot::TeleopInit() {
 }
 
 void Robot::TeleopPeriodic() {
- if (m_stick.GetYButton()){
-    m_elevator.Up();
+  if (m_stick.GetRightY() > 0.3) {
+    m_elevator.Up(m_stick.GetRightY());
   }
 
-  if (m_stick.GetAButton()) {
-    m_elevator.Down();
+  else if (m_stick.GetRightY() < -0.3) {
+    m_elevator.Down(m_stick.GetRightY());
   } 
 
-  
+  else {
+    m_elevator.Stop();
+  }
+
 }
 
 void Robot::DisabledInit() {}
