@@ -1,4 +1,4 @@
-#include "ctre/Phoenix.h"
+#include <rev/CANSparkMax.h>
 
 class Grabber {
 public:
@@ -11,6 +11,8 @@ public:
       bool m_lowered; 
 
 //Needs 1 motor
-    WPI_TalonFX m_motor_grabber{7}; 
+    rev::CANSparkMax m_motor_grabber_spin{7, rev::CANSparkMax::MotorType::kBrushless};
+    rev::CANSparkMax m_motor_grabber_wrist{8, rev::CANSparkMax::MotorType::kBrushless};
+
 };
 

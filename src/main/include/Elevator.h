@@ -1,14 +1,15 @@
-
-#include "ctre/Phoenix.h"
+#include <ctre/Phoenix.h> 
 #include <frc/Encoder.h>
 
-class Elevator {
 
+class Elevator {
+ 
 public:
     void Up(double);
     void Down(double);
     void Stop();
     frc::Encoder m_encoder{5,6};
+
 
     double max_up = 1000.0, max_down = 0.0;
     
@@ -18,4 +19,3 @@ public:
 
 
  };
-

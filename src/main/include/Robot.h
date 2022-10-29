@@ -14,6 +14,7 @@
 #include "Climber.h"
 
 #include "Elevator.h"
+#include "Grabber.h"
 
 frc::XboxController m_stick{0};
 
@@ -41,4 +42,5 @@ class Robot : public frc::TimedRobot {
   Climber m_climber;
 
  Elevator m_elevator;
+ Grabber m_grabber;
 };
