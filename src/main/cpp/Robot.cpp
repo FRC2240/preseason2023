@@ -61,19 +61,20 @@ void Robot::AutonomousPeriodic() {
 
 void Robot::TeleopInit() {
 
-
 }
 
-void Robot::TeleopPeriodic() {
- if (m_stick.GetYButton()){
-    m_elevator.Up();
-  }
+void Robot::TeleopPeriodic()
+{
+  if ( BUTTON::EVEVATOR_AXIS() > (float)0 )
+    {
+      m_elevator.Up();
+    }
 
-  if (m_stick.GetAButton()) {
-    m_elevator.Down();
-  } 
+  else
+    {
+      m_elevator.Down();
+    }
 
-  
 }
 
 void Robot::DisabledInit() {}

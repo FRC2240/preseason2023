@@ -4,12 +4,15 @@
 
 #pragma once
 
+#include "Buttons.h"
+#include "Elevator.h"
+
 #include <string>
 
 #include <frc/TimedRobot.h>
 #include <frc/smartdashboard/SendableChooser.h>
 #include <frc/XboxController.h>
-#include "Elevator.h"
+
 
 frc::XboxController m_stick{0};
 
@@ -35,5 +38,5 @@ class Robot : public frc::TimedRobot {
   const std::string kAutoNameCustom = "My Auto";
   std::string m_autoSelected;
 
- Elevator m_elevator;
+  Elevator m_elevator;
 };
