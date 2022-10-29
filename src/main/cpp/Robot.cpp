@@ -9,8 +9,6 @@
 
 #include <frc/smartdashboard/SmartDashboard.h>
 
-
-
 void Robot::RobotInit() {
   m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
   m_chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
@@ -63,17 +61,24 @@ void Robot::TeleopInit() {
 
 }
 
-void Robot::TeleopPeriodic()
-{
-  if ( BUTTON::EVEVATOR_AXIS() > (float)0 )
-    {
-      m_elevator.Up();
-    }
+void Robot::TeleopPeriodic() {
+   double throttle = -m_stick.GetLeftTriggerAxis() + m_stick.GetRightTriggerAxis();
 
-  else
-    {
-      m_elevator.Down();
-    }
+  double turnInput = m_stick.GetLeftX();
+
+  m_drive.drivetrain.ArcadeDrive(throttle, turnInput);
+
+  if (m_stick.GetRightY() > 0.3) {
+    m_elevator.Up(m_stick.GetRightY());
+  }
+
+  else if (m_stick.GetRightY() < -0.3) {
+    m_elevator.Down(m_stick.GetRightY());
+  } 
+
+  else {
+    m_elevator.Stop();
+  }
 
 }
 
