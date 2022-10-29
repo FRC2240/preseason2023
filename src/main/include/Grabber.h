@@ -6,9 +6,12 @@ public:
        void Down();
        void In();
        void Out();
+       states process(); 
+       enum STATES {intaking,ejecting,nothing}
+        
   private:
-      bool m_raised;
-      bool m_lowered; 
+      bool fall;
+      bool stown; 
 
 //Needs 1 motor
     rev::CANSparkMax m_motor_grabber_spin{7, rev::CANSparkMax::MotorType::kBrushless};
