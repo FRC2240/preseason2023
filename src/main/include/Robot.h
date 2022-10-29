@@ -9,6 +9,9 @@
 #include <frc/TimedRobot.h>
 #include <frc/smartdashboard/SendableChooser.h>
 #include <frc/XboxController.h>
+#include "Climber.h"
+
+frc::XboxController m_stick{0};
 
 class Robot : public frc::TimedRobot {
  public:

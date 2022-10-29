@@ -56,15 +56,9 @@ void Robot::AutonomousPeriodic() {
   }
 }
 
-void Robot::TeleopInit() {
+void Robot::TeleopInit() {}
 
-
-}
-
-void Robot::TeleopPeriodic() {
-
-  
-}
+void Robot::TeleopPeriodic() {}
 
 void Robot::DisabledInit() {}
 
