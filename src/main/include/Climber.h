@@ -1,4 +1,3 @@
-
 #include "ctre/Phoenix.h"
 class Climber {
 
