@@ -58,12 +58,14 @@ void Robot::AutonomousPeriodic() {
 
 void Robot::TeleopInit() {
 
-
 }
 
 void Robot::TeleopPeriodic() {
+   double throttle = -m_stick.GetLeftTriggerAxis() + m_stick.GetRightTriggerAxis();
 
-  
+  double turnInput = m_stick.GetLeftX();
+
+  m_drive.drivetrain.ArcadeDrive(throttle, turnInput);
 }
 
 void Robot::DisabledInit() {}
