@@ -5,9 +5,10 @@
 #pragma once
 
 #include <string>
-
+#include "Drive.h"
 #include <frc/TimedRobot.h>
 #include <frc/smartdashboard/SendableChooser.h>
+
 #include <frc/XboxController.h>
 #include "Elevator.h"
 
@@ -28,8 +29,8 @@ class Robot : public frc::TimedRobot {
   void SimulationInit() override;
   void SimulationPeriodic() override;
 
-
- private:
+  Drive m_drive;
+  private:
   frc::SendableChooser<std::string> m_chooser;
   const std::string kAutoNameDefault = "Default";
   const std::string kAutoNameCustom = "My Auto";
