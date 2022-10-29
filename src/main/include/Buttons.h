@@ -13,37 +13,37 @@ namespace BUTTON
 
   inline bool GRABBER_TOGGLE()
   {
-      return (float)joystick.GetYButton();
+      return joystick.GetYButton();
   }
 
-  inline float ELEVATOR_AXIS()
+  inline double ELEVATOR_AXIS()
   {
-     return (float)joystick.GetRightY();
+     return joystick.GetRightY();
   }
 
-  inline float THROTTLE_AXIS()
+  inline double THROTTLE_AXIS()
   {
-    return ( (float) (joystick.GetLeftTriggerAxis()-joystick.GetRightTriggerAxis() ) );
+    return  ( joystick.GetLeftTriggerAxis()-joystick.GetRightTriggerAxis() ) ;
   }
 
-  inline float TURN_AXIS()
+  inline double TURN_AXIS()
   {
-    return (float) joystick.GetLeftY();
+    return joystick.GetLeftY();
   }
 
-  inline float INTAKE_IN()
+  inline bool INTAKE_IN()
   {
-    return (float) joystick.GetLeftBumper();
+    return joystick.GetLeftBumper();
   }
 
-  inline float INTAKE_OUT()
+  inline bool INTAKE_OUT()
   {
-    return (float) joystick.GetRightBumper();
+    return joystick.GetRightBumper();
   }
 
-  inline float WRIST_TOGGLE()
+  inline bool WRIST_TOGGLE()
   {
-    return (float) joystick.GetRightBumper();
+    return joystick.GetRightBumper();
   }
 
   inline bool CLIMBER_UP()
@@ -69,7 +69,4 @@ namespace BUTTON
       return false;
       }
   }
-
-}
-
 #endif // BUTTONS_H_
