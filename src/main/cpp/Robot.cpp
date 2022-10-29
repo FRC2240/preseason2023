@@ -4,10 +4,10 @@
 
 #include "Robot.h"
 
+
 #include <fmt/core.h>
 
 #include <frc/smartdashboard/SmartDashboard.h>
-
 
 void Robot::RobotInit() {
   m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
@@ -57,9 +57,29 @@ void Robot::AutonomousPeriodic() {
   }
 }
 
-void Robot::TeleopInit() {}
+void Robot::TeleopInit() {
+
+}
 
 void Robot::TeleopPeriodic() {
+   double throttle = -m_stick.GetLeftTriggerAxis() + m_stick.GetRightTriggerAxis();
+
+  double turnInput = m_stick.GetLeftX();
+
+  m_drive.drivetrain.ArcadeDrive(throttle, turnInput);
+
+  if (m_stick.GetRightY() > 0.3) {
+    m_elevator.Up(m_stick.GetRightY());
+  }
+
+  else if (m_stick.GetRightY() < -0.3) {
+    m_elevator.Down(m_stick.GetRightY());
+  } 
+
+  else {
+    m_elevator.Stop();
+  }
+
 }
 
 void Robot::DisabledInit() {}

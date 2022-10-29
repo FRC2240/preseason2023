@@ -1,16 +1,25 @@
 #include "ctre/Phoenix.h"
+#include <frc/motorcontrol/MotorControllerGroup.h>
+#include <frc/drive/DifferentialDrive.h>
+#include "rev/CANSparkMax.h"
+
 
 class Drive{
 
 public:
-    void Forward();
-    void Backward();
-    void Left();
-    void Right();
+  Drive();
+    frc::DifferentialDrive drivetrain {m_left_drive, m_right_drive};
+
+
 private:
 //Needs four motors
-    WPI_TalonFX m_motor{1};
-    WPI_TalonFX m_motor{2};
-    WPI_TalonFX m_motor{3};
-    WPI_TalonFX m_motor{4};
+    rev::CANSparkMax m_front_left_motor{1,rev::CANSparkMax::MotorType::kBrushless};
+    rev::CANSparkMax m_front_right_motor{2,rev::CANSparkMax::MotorType::kBrushless};
+    rev::CANSparkMax m_back_left_motor{3,rev::CANSparkMax::MotorType::kBrushless};
+    rev::CANSparkMax m_back_right_motor{4,rev::CANSparkMax::MotorType::kBrushless};
+
+    frc::MotorControllerGroup m_left_drive{m_front_left_motor, m_back_left_motor};
+    frc::MotorControllerGroup m_right_drive{m_front_right_motor, m_back_right_motor};
+
+
 };

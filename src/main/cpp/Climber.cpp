@@ -30,3 +30,4 @@ void Climber::Stop()
 {
     m_motor.Set(0);
 }
+
