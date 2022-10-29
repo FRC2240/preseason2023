@@ -4,6 +4,11 @@
 
 #pragma once
 
+#include "Buttons.h"
+#include "Elevator.h"
+#include "Climber.h"
+#include "Grabber.h"
+
 #include <string>
 #include "Drive.h"
 #include <frc/TimedRobot.h>
@@ -11,10 +16,6 @@
 
 #include <frc/XboxController.h>
 
-#include "Climber.h"
-
-#include "Elevator.h"
-#include "Grabber.h"
 
 frc::XboxController m_stick{0};
 
@@ -40,7 +41,7 @@ class Robot : public frc::TimedRobot {
   const std::string kAutoNameCustom = "My Auto";
   std::string m_autoSelected;
   Climber m_climber;
-
- Elevator m_elevator;
- Grabber m_grabber;
+  
+  Elevator m_elevator;
+  Grabber m_grabber;
 };
