@@ -62,18 +62,15 @@ void Robot::TeleopInit() {
 }
 
 void Robot::TeleopPeriodic() {
-   double throttle = -m_stick.GetLeftTriggerAxis() + m_stick.GetRightTriggerAxis();
 
-  double turnInput = m_stick.GetLeftX();
+  m_drive.drivetrain.ArcadeDrive(BUTTON::THROTTLE_AXIS(), BUTTON::TURN_AXIS());
 
-  m_drive.drivetrain.ArcadeDrive(throttle, turnInput);
-
-  if (m_stick.GetRightY() > 0.3) {
-    m_elevator.Up(m_stick.GetRightY());
+  if (BUTTON::ELEVATOR_AXIS() > 0.3) {
+    m_elevator.Up(BUTTON::ELEVATOR_AXIS() );
   }
 
-  else if (m_stick.GetRightY() < -0.3) {
-    m_elevator.Down(m_stick.GetRightY());
+  else if (BUTTON::ELEVATOR_AXIS() < -0.3) {
+    m_elevator.Down(BUTTON::ELEVATOR_AXIS() );
   } 
 
   else {

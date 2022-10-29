@@ -69,4 +69,5 @@ namespace BUTTON
       return false;
       }
   }
+}
 #endif // BUTTONS_H_
