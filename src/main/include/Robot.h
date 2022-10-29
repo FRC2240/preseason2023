@@ -10,6 +10,7 @@
 #include <frc/smartdashboard/SendableChooser.h>
 #include <frc/XboxController.h>
 #include "Elevator.h"
+#include "Grabber.h"
 
 frc::XboxController m_stick{0};
 
@@ -36,4 +37,5 @@ class Robot : public frc::TimedRobot {
   std::string m_autoSelected;
 
  Elevator m_elevator;
+ Grabber m_grabber;
 };
