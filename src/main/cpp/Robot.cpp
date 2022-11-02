@@ -77,7 +77,7 @@ void Robot::TeleopPeriodic() {
     m_elevator.Stop();
   }
 
-  if (BUTTON::INTAKE_IN() )
+/*  if (BUTTON::INTAKE_IN() )
   {
     m_grabber.In();
   }
@@ -85,8 +85,10 @@ void Robot::TeleopPeriodic() {
   {
     m_grabber.Out();
   }
-  
-  }
+*/
+  m_grabber_last_run =  m_grabber.Logic(BUTTON::INTAKE_IN(), BUTTON::INTAKE_OUT(), m_grabber_last_run);
+
+}
 
 void Robot::DisabledInit() {}
 
