@@ -13,8 +13,8 @@ public:
 
 private:
 //Needs four motors
-    rev::CANSparkMax m_front_left_motor{1,rev::CANSparkMax::MotorType::kBrushless};
-    rev::CANSparkMax m_front_right_motor{2,rev::CANSparkMax::MotorType::kBrushless};
+    rev::CANSparkMax m_front_left_motor{12,rev::CANSparkMax::MotorType::kBrushless};
+    rev::CANSparkMax m_front_right_motor{11,rev::CANSparkMax::MotorType::kBrushless};
     rev::CANSparkMax m_back_left_motor{3,rev::CANSparkMax::MotorType::kBrushless};
     rev::CANSparkMax m_back_right_motor{4,rev::CANSparkMax::MotorType::kBrushless};
 

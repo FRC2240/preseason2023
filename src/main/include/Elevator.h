@@ -5,19 +5,21 @@
 class Elevator {
  
 public:
-    void Up(double);
-    void Down(double);
+    Elevator();
+    void Up(double speed);
+    void Down(double speed);
     void Stop();
-    void SoftLimits();
+    /* void SoftLimits(); */
+    double test(double speed);
 private:
-    frc::Encoder m_encoder{5,6};
+    frc::Encoder m_encoder{1,2};
 
 
     double max_up = 1000.0, max_down = 0.0;
     
     //Needs two motors
-    WPI_TalonFX m_motor_elevator_left{5};
-    WPI_TalonFX m_motor_elevator_right{6};
+    WPI_TalonFX m_motor_elevator_left{1};
+    WPI_TalonFX m_motor_elevator_right{2};
 
 
  };

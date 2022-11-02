@@ -8,7 +8,7 @@ public:
 void Up(double);
 void Down(double);
 void Stop();
-frc::Encoder m_ClimberEncoder{1,0};
+frc::Encoder m_ClimberEncoder{25,24};
 
 double max_ClimberUp = 1000.0, max_CLimberDown = 0.0;
 
