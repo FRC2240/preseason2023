@@ -36,6 +36,7 @@ void Elevator::Stop()
 
 m_motor_elevator_left.ConfigForwardSoftLimitEnable(true);
 m_motor_elevator_left.ConfigReverseSoftLimitEnable(true);
+
 m_motor_elevator_left.ConfigForwardSoftLimitThreshold(1000);
 m_motor_elevator_left.ConfigReverseSoftLimitEnable(10);
 } */
@@ -44,3 +45,7 @@ double Elevator::test(double speed) {
     m_motor_elevator_right.Follow(m_motor_elevator_left);
     return m_encoder.Get();
 }
+
+
+}
+

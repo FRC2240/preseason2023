@@ -80,6 +80,17 @@ void Robot::TeleopPeriodic() {
   }
 
  std::cout << m_elevator.test(BUTTON::ELEVATOR_AXIS()) << std::endl;
+/*  if (BUTTON::INTAKE_IN() )
+  {
+    m_grabber.In();
+  }
+  else if (BUTTON::INTAKE_OUT() )
+  {
+    m_grabber.Out();
+  }
+*/
+  m_grabber_last_run =  m_grabber.Logic(BUTTON::INTAKE_IN(), BUTTON::INTAKE_OUT(), m_grabber_last_run);
+
 
 }
 

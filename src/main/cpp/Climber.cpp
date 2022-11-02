@@ -7,7 +7,7 @@
 
 void Climber::Up(double speed) 
 {
-    if (m_ClimberEncoder.GetDistance() >= max_ClimberUp) {
+    if (m_ClimberEncoder.GetDistance() >= CONSTANTS::CLIMBER::MAX_CLIMBER_UP) {
         Stop();
     }
     else { 
@@ -18,7 +18,7 @@ void Climber::Up(double speed)
 
 void Climber::Down(double speed)
 {
-    if (m_ClimberEncoder.GetDistance() <= max_CLimberDown) {
+    if (m_ClimberEncoder.GetDistance() <= CONSTANTS::CLIMBER::MAX_CLIMBER_DOWN) {
         Stop();    
     } 
     else {
