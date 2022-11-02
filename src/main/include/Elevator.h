@@ -9,6 +9,7 @@ public:
     void Down(double);
     void Stop();
     void SoftLimits();
+    
 private:
     frc::Encoder m_encoder{5,6};
 
