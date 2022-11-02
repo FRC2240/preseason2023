@@ -63,7 +63,7 @@ void Robot::TeleopInit() {
 
 void Robot::TeleopPeriodic() {
 
-  m_drive.drivetrain.ArcadeDrive(BUTTON::THROTTLE_AXIS(), BUTTON::TURN_AXIS());
+  m_drive.ArcadeDrive(BUTTON::THROTTLE_AXIS(), BUTTON::TURN_AXIS());
 
   if (BUTTON::ELEVATOR_AXIS() > 0.3) {
     m_elevator.Up(BUTTON::ELEVATOR_AXIS() );
