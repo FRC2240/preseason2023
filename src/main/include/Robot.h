@@ -35,14 +35,17 @@ class Robot : public frc::TimedRobot {
   void SimulationInit() override;
   void SimulationPeriodic() override;
 
-  Drive m_drive;
-  private:
+
+private:
   frc::SendableChooser<std::string> m_chooser;
   const std::string kAutoNameDefault = "Default";
   const std::string kAutoNameCustom = "My Auto";
   std::string m_autoSelected;
+
+  Grabber::STATES m_grabber_last_run = Grabber::STATES::NOTHING;
+
+  Drive m_drive;
   Climber m_climber;
-  
   Elevator m_elevator;
   Grabber m_grabber;
   frc2::PIDController m_motor_elevator_leftPIDController{0.0,0.0,0.0};
