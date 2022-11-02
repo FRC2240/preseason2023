@@ -1,5 +1,6 @@
 #include "ctre/Phoenix.h"
 #include <frc/Encoder.h>
+#include "Constants.h"
 
 
 class Climber {
@@ -8,10 +9,10 @@ public:
 void Up(double);
 void Down(double);
 void Stop();
-frc::Encoder m_ClimberEncoder{1,0};
+frc::Encoder m_ClimberEncoder{CONSTANTS::CLIMBER::ENCODER_A, 
+                                CONSTANTS::CLIMBER::ENCODER_B};
 
-double max_ClimberUp = 1000.0, max_CLimberDown = 0.0;
 
- WPI_TalonFX m_motor{0};
+ WPI_TalonFX m_motor{CONSTANTS::CLIMBER::MOTOR_ID};
 
 };
