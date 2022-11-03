@@ -2,6 +2,7 @@
 #include <frc/motorcontrol/MotorControllerGroup.h>
 #include <frc/drive/DifferentialDrive.h>
 #include "rev/CANSparkMax.h"
+#include <Constants.h>
 
 
 class Drive{
@@ -13,10 +14,11 @@ public:
 
 private:
 //Needs four motors
-    rev::CANSparkMax m_front_left_motor{12,rev::CANSparkMax::MotorType::kBrushless};
-    rev::CANSparkMax m_front_right_motor{11,rev::CANSparkMax::MotorType::kBrushless};
-    rev::CANSparkMax m_back_left_motor{3,rev::CANSparkMax::MotorType::kBrushless};
-    rev::CANSparkMax m_back_right_motor{4,rev::CANSparkMax::MotorType::kBrushless};
+    rev::CANSparkMax m_front_left_motor{CONSTANTS::DRIVE::front_Left,rev::CANSparkMax::MotorType::kBrushless};
+    rev::CANSparkMax m_front_right_motor{CONSTANTS::DRIVE::front_Right,rev::CANSparkMax::MotorType::kBrushless};
+    rev::CANSparkMax m_back_left_motor{CONSTANTS::DRIVE::back_Left,rev::CANSparkMax::MotorType::kBrushless};
+    rev::CANSparkMax m_back_right_motor{CONSTANTS::DRIVE::back_Right,rev::CANSparkMax::MotorType::kBrushless};
+
 
     frc::MotorControllerGroup m_left_drive{m_front_left_motor, m_back_left_motor};
     frc::MotorControllerGroup m_right_drive{m_front_right_motor, m_back_right_motor};
