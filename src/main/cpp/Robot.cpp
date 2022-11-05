@@ -65,7 +65,7 @@ void Robot::TeleopPeriodic() {
 
   double turnInput = m_stick.GetLeftX();
 
-  m_drive.drivetrain.ArcadeDrive(throttle, turnInput);
+  m_drive.ArcadeDrive(throttle, turnInput);
 }
 
 void Robot::DisabledInit() {}

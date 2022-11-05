@@ -5,9 +5,8 @@
 class Drive{        
 
 public:
-  -Drive::ArcadeDrive(double throttle, double turn)  {
-    m_drivetrain.ArcadeDrive(throttle, turn)
-}
+   Drive();
+  void ArcadeDrive(double throttle, double turn);
 
 
 
@@ -21,7 +20,6 @@ private:
     frc::MotorControllerGroup m_left_drive{m_front_left_motor, m_back_left_motor};
     frc::MotorControllerGroup m_right_drive{m_front_right_motor, m_back_right_motor};
 
-   Drive();
     frc::DifferentialDrive drivetrain {m_left_drive, m_right_drive};
 
 };
