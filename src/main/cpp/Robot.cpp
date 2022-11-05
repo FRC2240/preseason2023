@@ -4,6 +4,7 @@
 
 #include "Robot.h"
 
+
 #include <fmt/core.h>
 
 #include <frc/smartdashboard/SmartDashboard.h>
@@ -61,11 +62,35 @@ void Robot::TeleopInit() {
 }
 
 void Robot::TeleopPeriodic() {
-   double throttle = -m_stick.GetLeftTriggerAxis() + m_stick.GetRightTriggerAxis();
 
-  double turnInput = m_stick.GetLeftX();
+  m_drive.ArcadeDrive(BUTTON::THROTTLE_AXIS(), BUTTON::TURN_AXIS());
 
-  m_drive.ArcadeDrive(throttle, turnInput);
+  if (BUTTON::ELEVATOR_AXIS() > 0.3) {
+    std::cout << "here" << "\n";
+    m_elevator.Up(BUTTON::ELEVATOR_AXIS() );
+  }
+
+  else if (BUTTON::ELEVATOR_AXIS() < -0.3) {
+    std::cout << "here1" << "\n";
+    m_elevator.Down(BUTTON::ELEVATOR_AXIS() );
+  } 
+
+  else {
+    m_elevator.Stop();
+  }
+
+ std::cout << m_elevator.test(BUTTON::ELEVATOR_AXIS()) << std::endl;
+/*  if (BUTTON::INTAKE_IN() )
+  {
+    m_grabber.In();
+  }
+  else if (BUTTON::INTAKE_OUT() )
+  {
+    m_grabber.Out();
+  }
+*/
+  m_grabber_last_run =  m_grabber.Logic(BUTTON::INTAKE_IN(), BUTTON::INTAKE_OUT(), m_grabber_last_run);
+
 }
 
 void Robot::DisabledInit() {}

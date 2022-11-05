@@ -4,16 +4,22 @@
 
 #pragma once
 
+#include "Buttons.h"
+#include "Elevator.h"
+#include "Climber.h"
+#include "Grabber.h"
+
 #include <string>
+#include <iostream>
 #include "Drive.h"
 #include <frc/TimedRobot.h>
 #include <frc/smartdashboard/SendableChooser.h>
-#include <frc/XboxController.h> 
+#include <frc/controller/PIDController.h>
 
-frc::XboxController m_stick{0};
+//#include <frc/XboxController.h>
 
 
-
+//frc::XboxController m_stick{0};
 
 class Robot : public frc::TimedRobot {
  public:
@@ -30,10 +36,18 @@ class Robot : public frc::TimedRobot {
   void SimulationInit() override;
   void SimulationPeriodic() override;
 
-  Drive m_drive;
- private:
+
+private:
   frc::SendableChooser<std::string> m_chooser;
   const std::string kAutoNameDefault = "Default";
   const std::string kAutoNameCustom = "My Auto";
   std::string m_autoSelected;
+
+  Grabber::STATES m_grabber_last_run = Grabber::STATES::NOTHING;
+
+  Drive m_drive;
+  Climber m_climber;
+  Elevator m_elevator;
+  Grabber m_grabber;
+  frc2::PIDController m_motor_elevator_leftPIDController{0.0,0.0,0.0};
 };
