@@ -1,4 +1,4 @@
-#include <ctre/Phoenix.h> 
+#include "rev/CANSparkMax.h"
 #include <frc/Encoder.h>
 #include "Constants.h"
 
@@ -8,18 +8,15 @@ public:
     Elevator();
     void Up(double speed);
     void Down(double speed);
-    void Stop();
-    /* void SoftLimits(); */
-    double test(double speed);
+    void SoftLimits();
+    void test();
 private:
-    frc::Encoder m_encoder{CONSTANTS::ELEVATOR::ENCODER_A, CONSTANTS::ELEVATOR::ENCODER_B};
-
 
     double max_up = CONSTANTS::ELEVATOR::MAX_ELEVATOR_UP, max_down = CONSTANTS::ELEVATOR::MAX_ELEVATOR_DOWN;
     
     //Needs two motors
-    WPI_TalonFX m_motor_elevator_left{CONSTANTS::ELEVATOR::LEFT_MOTOR_ID};
-    WPI_TalonFX m_motor_elevator_right{CONSTANTS::ELEVATOR::RIGHT_MOTOR_ID};
-
+    rev::CANSparkMax m_motor_elevator_left{CONSTANTS::ELEVATOR::LEFT_MOTOR_ID, rev::CANSparkMax::MotorType::kBrushless};
+    rev::CANSparkMax m_motor_elevator_right{CONSTANTS::ELEVATOR::RIGHT_MOTOR_ID, rev::CANSparkMax::MotorType::kBrushless};
+    rev::SparkMaxRelativeEncoder m_encoder = m_motor_elevator_left.GetEncoder();
 
  };
