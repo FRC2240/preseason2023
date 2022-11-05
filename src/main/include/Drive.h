@@ -2,12 +2,12 @@
 #include <frc/motorcontrol/MotorControllerGroup.h>
 #include <frc/drive/DifferentialDrive.h>
 #include "rev/CANSparkMax.h"
-class Drive{
+class Drive{        
 
 public:
   Drive();
     frc::DifferentialDrive drivetrain {m_left_drive, m_right_drive};
-  
+
 
 
 private:
