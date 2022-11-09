@@ -3,45 +3,29 @@
 
 Elevator::Elevator()
 {
-  //  Elevator::SoftLimits();
+    m_motor_elevator_left.RestoreFactoryDefaults();
+    m_motor_elevator_right.RestoreFactoryDefaults();
+    SoftLimits();
+    m_motor_elevator_right.Follow(m_motor_elevator_left, true);
 } 
 void Elevator::Up(double speed) 
 {
-    if (m_encoder.GetDistance() >= max_up) {
-        Stop();
-    }
-    else { 
         m_motor_elevator_left.Set(speed);
-        m_motor_elevator_right.Follow(m_motor_elevator_left);
-    }
 }
-
 void Elevator::Down(double speed)
 {
-    if (m_encoder.GetDistance() <= max_down) {
-        Stop();    
-    } 
-    else {
         m_motor_elevator_left.Set(speed);
-        m_motor_elevator_right.Follow(m_motor_elevator_left);
-    }
+  
 }
-
-void Elevator::Stop()
+void Elevator::SoftLimits() 
 {
-    m_motor_elevator_left.Set(0);
-    m_motor_elevator_right.Follow(m_motor_elevator_left);
-}
-/* void Elevator::SoftLimits() {
+    m_motor_elevator_left.EnableSoftLimit(rev::CANSparkMax::SoftLimitDirection::kForward, true);
+    m_motor_elevator_left.EnableSoftLimit(rev::CANSparkMax::SoftLimitDirection::kReverse, true);
+    m_motor_elevator_left.SetSoftLimit(rev::CANSparkMax::SoftLimitDirection::kForward, CONSTANTS::ELEVATOR::MAX_ELEVATOR_UP);
+    m_motor_elevator_left.SetSoftLimit(rev::CANSparkMax::SoftLimitDirection::kReverse, CONSTANTS::ELEVATOR::MAX_ELEVATOR_DOWN);
 
-m_motor_elevator_left.ConfigForwardSoftLimitEnable(true);
-m_motor_elevator_left.ConfigReverseSoftLimitEnable(true);
-
-m_motor_elevator_left.ConfigForwardSoftLimitThreshold(1000);
-m_motor_elevator_left.ConfigReverseSoftLimitEnable(10);
-} */
-double Elevator::test(double speed) {
-    m_motor_elevator_left.Set(speed);
-    m_motor_elevator_right.Follow(m_motor_elevator_left);
-    return m_encoder.Get();
+} 
+void Elevator::test() 
+{
+    std::cout << "encoder: " << m_encoder.GetPosition() << "\n";
 }
