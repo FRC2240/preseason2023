@@ -2,32 +2,30 @@
 #include <Climber.h>
 
 
-
-
-
-void Climber::Up(double speed) 
+Climber::Climber()
 {
-    if (m_ClimberEncoder.GetDistance() >= CONSTANTS::CLIMBER::MAX_CLIMBER_UP) {
-        Stop();
-    }
-    else { 
-        m_motor.Set(speed);
-    }
+SoftLimits();
+
 }
 
 
-void Climber::Down(double speed)
+
+void Climber::SoftLimits()
 {
-    if (m_ClimberEncoder.GetDistance() <= CONSTANTS::CLIMBER::MAX_CLIMBER_DOWN) {
-        Stop();    
-    } 
-    else {
-        m_motor.Set(speed);
-    }
+    m_motor.ConfigForwardSoftLimitEnable(true);
+    m_motor.ConfigReverseSoftLimitEnable(true);
+    m_motor.ConfigForwardSoftLimitThreshold(CONSTANTS::CLIMBER::MAX_CLIMBER_UP);
+    m_motor.ConfigReverseSoftLimitThreshold(CONSTANTS::CLIMBER::MAX_CLIMBER_DOWN);
 }
 
-void Climber::Stop()
-{
-    m_motor.Set(0);
+
+void Climber::Up() 
+{ 
+    m_motor.Set(0.5);
 }
 
+
+void Climber::Down()
+{
+    m_motor.Set(-0.5);
+}

@@ -64,7 +64,7 @@ void Robot::TeleopInit() {
 void Robot::TeleopPeriodic() {
 
   m_drive.drivetrain.ArcadeDrive(BUTTON::THROTTLE_AXIS(), BUTTON::TURN_AXIS());
-
+ 
   if (BUTTON::ELEVATOR_AXIS() > 0.3) {
     std::cout << "here" << "\n";
     m_elevator.Up(BUTTON::ELEVATOR_AXIS() );
@@ -80,6 +80,21 @@ void Robot::TeleopPeriodic() {
   }
 
  std::cout << m_elevator.test(BUTTON::ELEVATOR_AXIS()) << std::endl;
+
+
+if ( BUTTON::CLIMBER_UP() )
+{
+  m_climber.Up();
+}
+
+else if ( BUTTON::CLIMBER_DOWN() )
+{
+  m_climber.Down();
+}
+
+
+
+
 /*  if (BUTTON::INTAKE_IN() )
   {
     m_grabber.In();

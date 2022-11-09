@@ -6,9 +6,13 @@
 class Climber {
 
 public:
-void Up(double);
-void Down(double);
-void Stop();
+Climber();
+
+void SoftLimits();
+void Up();
+void Down();
+
+private:
 frc::Encoder m_ClimberEncoder{CONSTANTS::CLIMBER::ENCODER_A, 
                                 CONSTANTS::CLIMBER::ENCODER_B};
 
