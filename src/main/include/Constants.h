@@ -18,14 +18,13 @@ namespace CONSTANTS
     }
     namespace ELEVATOR
     {
-        constexpr double MAX_ELEVATOR_UP = 1000.0, MAX_ELEVATOR_DOWN = 0.0;
-        constexpr int LEFT_MOTOR_ID = 1;
-        constexpr int RIGHT_MOTOR_ID = 2;
-        constexpr int ENCODER_A = 1, ENCODER_B = 2;
+        constexpr double MAX_ELEVATOR_UP = 10000.0, MAX_ELEVATOR_DOWN = 0.0;
+        constexpr int LEFT_MOTOR_ID = 5;
+        constexpr int RIGHT_MOTOR_ID = 6;
+        constexpr int ENCODER_A = 2, ENCODER_B = 3;
 
     }
 }
 
 
 #endif // CONSTANTS_H_
-
