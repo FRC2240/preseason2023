@@ -1,47 +1,106 @@
-  #include <Grabber.h>
+#include <Grabber.h>
 
+Grabber::STATES Grabber::Logic(
+                               bool intake_button,
+                               bool eject_button,
+                               STATES last_state /*=NOTHING*/)
+  /// Returns the current state of the machine at the end of the cycle
+{
+  if ( left_limit_switch.Get() || right_limit_switch.Get() )
+    {
+      //Grabber::Down();
+    }
+  else if (!left_limit_switch.Get() && right_limit_switch.Get() )
+    {
+      //Grabber::Up();
+    }
+
+  switch (last_state)
+    {
+  case INTAKING:
+    if (&intake_button &&
+        (!left_limit_switch.Get() || !right_limit_switch.Get() ) )
+      {
+        //Grabber::Down();
+        Grabber::In();
+        return INTAKING;
+      }
+    else if (&intake_button &&
+             (left_limit_switch.Get() || right_limit_switch.Get() ) )
+      {
+        //Grabber::Down();
+        m_motor_grabber_spin.Set(0.0);
+        return NOTHING;
+      }
+    else
+      {
+        return NOTHING;
+        // Do nothing at all.
+      }
+    break;
+
+  case EJECTING:
+    if (&eject_button)
+      {
+       Grabber::Out();
+       return EJECTING;
+      }
+    else
+      {
+        return NOTHING;
+      }
+    break;
+
+  case NOTHING:
+    if (left_limit_switch.Get() && right_limit_switch.Get() )
+      {
+        //Grabber::Up();
+        return NOTHING;
+      }
+    else if (&intake_button &&
+             !left_limit_switch.Get() &&
+             !right_limit_switch.Get() )
+      {
+        //Grabber::Down();
+        Grabber::In();
+        return INTAKING;
+      }
+    else if (&eject_button)
+      {
+        Grabber::Out();
+        return EJECTING;
+      }
+
+    else
+      {
+        //Grabber::Down();
+      }
+    break;
+  }
+  return NOTHING;
+}
 /* 
 void Grabber::Up(){
-
-
 if (m_Grabber.ende
-
 }
-
-
 void Grabber::Down(){
-
 if (m_Grabber.)
-
 }
 */
 
 
-void Grabber::In(){
-
-//this function spins backward in one way so the B button spin backwards in order to grab an object//
+void Grabber::In()
+{
 
 //Grabber Spining In//
 m_motor_grabber_spin.Set(-0.5);
 
-
-// the limit switch is for the wires to be energized or de-energized
-// the limit switch is for the wheels to turn on when it is responded to the b button and press the b button again to turn off
-// if you press the x button while the b button is still on then the wheels will start to spin foward 
 }
 
-void Grabber::Out(){
-
-//this function spins forward out in the other way so the X button spins forwards in order to release an object//
+void Grabber::Out()
+{
 
 //Grabber Spining Out//
 m_motor_grabber_spin.Set(0.5);
-
-
-// the limit switch is for the wires to be energized or de-energized
-// the limit swicht is for the wheels to turn on when it is responed to the x button and press the x button again to turn off 
-// if you press the b button while the x button is still on then the wheels will start to spin backwards
-
-
 }
 
