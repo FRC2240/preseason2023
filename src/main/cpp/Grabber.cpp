@@ -102,6 +102,7 @@ void Grabber::Out()
 
 //Grabber Spining Out//
 m_motor_grabber_spin.Set(0.5);
+
 }
 
 void Grabber::GrabberPIDInit() {
@@ -112,3 +113,4 @@ void Grabber::GrabberPIDInit() {
   m_grabber_wrist_PIDController.SetFF(m_grabber_wrist_Coeff.kFF);
   m_grabber_wrist_PIDController.SetOutputRange(m_grabber_wrist_Coeff.kMinOutput, m_grabber_wrist_Coeff.kMaxOutput);
 }
+

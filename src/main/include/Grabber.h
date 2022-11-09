@@ -22,7 +22,7 @@ public:
       bool full;
       bool stowed;
 
-//Needs 1 motor
+//Needs 2 motor
     rev::CANSparkMax m_motor_grabber_spin{7, rev::CANSparkMax::MotorType::kBrushless};
     rev::CANSparkMax m_motor_grabber_wrist{8, rev::CANSparkMax::MotorType::kBrushless};
 
@@ -36,5 +36,5 @@ struct pidCoeff
  
 pidCoeff m_grabber_wrist_Coeff{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 
-
 };
+

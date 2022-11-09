@@ -23,6 +23,7 @@ void Elevator::SoftLimits()
     m_motor_elevator_left.EnableSoftLimit(rev::CANSparkMax::SoftLimitDirection::kReverse, true);
     m_motor_elevator_left.SetSoftLimit(rev::CANSparkMax::SoftLimitDirection::kForward, CONSTANTS::ELEVATOR::MAX_ELEVATOR_UP);
     m_motor_elevator_left.SetSoftLimit(rev::CANSparkMax::SoftLimitDirection::kReverse, CONSTANTS::ELEVATOR::MAX_ELEVATOR_DOWN);
+
 } 
 void Elevator::test() 
 {
