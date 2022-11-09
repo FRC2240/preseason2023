@@ -10,14 +10,13 @@ namespace CONSTANTS
         constexpr int back_Left = 3;
         constexpr int back_Right = 4;
     }
-    namespace CLIMBER
+    namespace CLIMBER 
     {
         constexpr double MAX_CLIMBER_UP = 1000.0, MAX_CLIMBER_DOWN = 0.0;
-        constexpr int MOTOR_ID = 0;
+        constexpr int MOTOR_ID = 7;
         constexpr int ENCODER_A = 1, ENCODER_B = 0;
     }
 }
 
 
 #endif // CONSTANTS_H_
-
