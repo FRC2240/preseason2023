@@ -18,5 +18,4 @@ private:
     rev::CANSparkMax m_motor_elevator_left{CONSTANTS::ELEVATOR::LEFT_MOTOR_ID, rev::CANSparkMax::MotorType::kBrushless};
     rev::CANSparkMax m_motor_elevator_right{CONSTANTS::ELEVATOR::RIGHT_MOTOR_ID, rev::CANSparkMax::MotorType::kBrushless};
     rev::SparkMaxRelativeEncoder m_encoder = m_motor_elevator_left.GetEncoder();
-
- };
+};

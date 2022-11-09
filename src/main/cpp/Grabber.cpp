@@ -112,6 +112,5 @@ void Grabber::GrabberPIDInit() {
   m_grabber_wrist_PIDController.SetIZone(m_grabber_wrist_Coeff.kIz);
   m_grabber_wrist_PIDController.SetFF(m_grabber_wrist_Coeff.kFF);
   m_grabber_wrist_PIDController.SetOutputRange(m_grabber_wrist_Coeff.kMinOutput, m_grabber_wrist_Coeff.kMaxOutput);
-
 }
 

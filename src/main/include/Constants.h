@@ -37,4 +37,3 @@ namespace CONSTANTS
 
 
 #endif // CONSTANTS_H_
-

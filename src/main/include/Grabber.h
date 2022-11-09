@@ -9,7 +9,6 @@ public:
   void Down();
   void In();
   void Out();
-
   void GrabberPIDInit();
 
   STATES Logic(bool intake_button,
@@ -38,3 +37,4 @@ struct pidCoeff
 pidCoeff m_grabber_wrist_Coeff{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 
 };
+
