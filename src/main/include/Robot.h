@@ -43,8 +43,6 @@ private:
   const std::string kAutoNameCustom = "My Auto";
   std::string m_autoSelected;
 
-  Grabber::STATES m_grabber_last_run = Grabber::STATES::NOTHING;
-
   Drive m_drive;
   Climber m_climber;
   Elevator m_elevator;
