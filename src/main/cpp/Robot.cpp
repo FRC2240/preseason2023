@@ -75,14 +75,7 @@ void Robot::TeleopPeriodic() {
 
   else if (BUTTON::ELEVATOR_AXIS() < -0.1) {
     m_elevator.Down(BUTTON::ELEVATOR_AXIS() );
-  } 
-
-
-  else {
-    m_elevator.Stop();
   }
-
- std::cout << m_elevator.test(BUTTON::ELEVATOR_AXIS()) << std::endl;
 
 
 if ( BUTTON::CLIMBER_UP() )
