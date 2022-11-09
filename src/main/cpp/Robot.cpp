@@ -101,7 +101,7 @@ else if ( BUTTON::CLIMBER_DOWN() )
     m_grabber.Out();
   }
 */
-  m_grabber_last_run =  m_grabber.Logic(BUTTON::INTAKE_IN(), BUTTON::INTAKE_OUT(), m_grabber_last_run);
+  m_grabber.Logic(BUTTON::INTAKE_IN(), BUTTON::INTAKE_OUT() );
 
 
 }

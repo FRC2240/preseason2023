@@ -2,8 +2,8 @@
 
 Grabber::STATES Grabber::Logic(
                                bool intake_button,
-                               bool eject_button,
-                               STATES last_state /*=NOTHING*/)
+                               bool eject_button
+                               )
   /// Returns the current state of the machine at the end of the cycle
 {
   if ( left_limit_switch.Get() || right_limit_switch.Get() )
@@ -18,35 +18,41 @@ Grabber::STATES Grabber::Logic(
   switch (last_state)
     {
   case INTAKING:
-    if (&intake_button &&
+    if (intake_button &&
         (!left_limit_switch.Get() || !right_limit_switch.Get() ) )
       {
         //Grabber::Down();
         Grabber::In();
+        last_state = INTAKING;
         return INTAKING;
       }
-    else if (&intake_button &&
+    else if (intake_button &&
              (left_limit_switch.Get() || right_limit_switch.Get() ) )
       {
         //Grabber::Down();
         m_motor_grabber_spin.Set(0.0);
+        last_state = NOTHING;
         return NOTHING;
       }
     else
       {
+        last_state = NOTHING;
         return NOTHING;
         // Do nothing at all.
       }
     break;
 
   case EJECTING:
-    if (&eject_button)
+    if (eject_button)
       {
        Grabber::Out();
+
+       last_state = EJECTING;
        return EJECTING;
       }
     else
       {
+        last_state = NOTHING;
         return NOTHING;
       }
     break;
@@ -55,28 +61,34 @@ Grabber::STATES Grabber::Logic(
     if (left_limit_switch.Get() && right_limit_switch.Get() )
       {
         //Grabber::Up();
+        last_state = NOTHING;
         return NOTHING;
       }
-    else if (&intake_button &&
+    else if (intake_button &&
              !left_limit_switch.Get() &&
              !right_limit_switch.Get() )
       {
         //Grabber::Down();
         Grabber::In();
+        last_state = INTAKING;
         return INTAKING;
       }
-    else if (&eject_button)
+    else if (eject_button)
       {
         Grabber::Out();
+        last_state = EJECTING;
         return EJECTING;
       }
 
     else
       {
         //Grabber::Down();
+        last_state = NOTHING;
+        return NOTHING;
       }
     break;
   }
+  last_state = NOTHING;
   return NOTHING;
 }
 /* 
