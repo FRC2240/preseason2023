@@ -1,5 +1,10 @@
 #include <Grabber.h>
 
+Grabber::Grabber()
+{
+  Grabber::GrabberPIDInit();
+}
+
 Grabber::STATES Grabber::Logic(
                                bool intake_button,
                                bool eject_button
@@ -8,11 +13,11 @@ Grabber::STATES Grabber::Logic(
 {
   if ( left_limit_switch.Get() || right_limit_switch.Get() )
     {
-      //Grabber::Down();
+      Grabber::Down();
     }
   else if (!left_limit_switch.Get() && right_limit_switch.Get() )
     {
-      //Grabber::Up();
+      Grabber::Up();
     }
 
   switch (last_state)
@@ -21,7 +26,7 @@ Grabber::STATES Grabber::Logic(
     if (intake_button &&
         (!left_limit_switch.Get() || !right_limit_switch.Get() ) )
       {
-        //Grabber::Down();
+        Grabber::Down();
         Grabber::In();
         last_state = INTAKING;
         return INTAKING;
@@ -29,7 +34,7 @@ Grabber::STATES Grabber::Logic(
     else if (intake_button &&
              (left_limit_switch.Get() || right_limit_switch.Get() ) )
       {
-        //Grabber::Down();
+        Grabber::Down();
         m_motor_grabber_spin.Set(0.0);
         last_state = NOTHING;
         return NOTHING;
@@ -60,7 +65,7 @@ Grabber::STATES Grabber::Logic(
   case NOTHING:
     if (left_limit_switch.Get() && right_limit_switch.Get() )
       {
-        //Grabber::Up();
+        Grabber::Up();
         last_state = NOTHING;
         return NOTHING;
       }
@@ -68,7 +73,7 @@ Grabber::STATES Grabber::Logic(
              !left_limit_switch.Get() &&
              !right_limit_switch.Get() )
       {
-        //Grabber::Down();
+        Grabber::Down();
         Grabber::In();
         last_state = INTAKING;
         return INTAKING;
@@ -82,7 +87,7 @@ Grabber::STATES Grabber::Logic(
 
     else
       {
-        //Grabber::Down();
+        Grabber::Down();
         last_state = NOTHING;
         return NOTHING;
       }
@@ -91,15 +96,19 @@ Grabber::STATES Grabber::Logic(
   last_state = NOTHING;
   return NOTHING;
 }
-/* 
-void Grabber::Up(){
-if (m_Grabber.ende
-}
-void Grabber::Down(){
-if (m_Grabber.)
-}
-*/
 
+void Grabber::Up()
+{
+
+  m_grabber_wrist_PIDController.SetReference(CONSTANTS::GRABBER::PID_UP_TARGET,
+                                             rev::CANSparkMax::ControlType::kSmartMotion);
+}
+
+void Grabber::Down()
+{
+    m_grabber_wrist_PIDController.SetReference(CONSTANTS::GRABBER::PID_DOWN_TARGET,
+                                               rev::CANSparkMax::ControlType::kSmartMotion);
+}
 
 void Grabber::In()
 {
@@ -117,7 +126,8 @@ m_motor_grabber_spin.Set(0.5);
 
 }
 
-void Grabber::GrabberPIDInit() {
+void Grabber::GrabberPIDInit()
+{
   m_grabber_wrist_PIDController.SetP(m_grabber_wrist_Coeff.kP);
   m_grabber_wrist_PIDController.SetI(m_grabber_wrist_Coeff.kI);
   m_grabber_wrist_PIDController.SetD(m_grabber_wrist_Coeff.kD);

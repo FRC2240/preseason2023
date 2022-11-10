@@ -1,11 +1,12 @@
 #include <rev/CANSparkMax.h>
 #include "frc/DigitalInput.h"
+#include "Constants.h"
 
 class Grabber {
 private:  enum STATES {INTAKING, EJECTING, NOTHING};
 
 public:
-
+  Grabber();
   void Up();
   void Down();
   void In();
@@ -25,8 +26,11 @@ public:
   STATES last_state = NOTHING;
 
   //Needs 2 motor
-  rev::CANSparkMax m_motor_grabber_spin{7, rev::CANSparkMax::MotorType::kBrushless};
-  rev::CANSparkMax m_motor_grabber_wrist{8, rev::CANSparkMax::MotorType::kBrushless};
+  rev::CANSparkMax m_motor_grabber_spin{CONSTANTS::GRABBER::SPIN_MOTOR_ID,
+                                        rev::CANSparkMax::MotorType::kBrushless};
+
+  rev::CANSparkMax m_motor_grabber_wrist{CONSTANTS::GRABBER::WRIST_MOTOR_ID,
+                                         rev::CANSparkMax::MotorType::kBrushless};
 
   //PIDs
   rev::SparkMaxPIDController m_grabber_wrist_PIDController = m_motor_grabber_wrist.GetPIDController();
