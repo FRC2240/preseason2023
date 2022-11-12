@@ -23,12 +23,12 @@ namespace BUTTON
 
   inline double THROTTLE_AXIS()
   {
-    return  ( joystick.GetLeftTriggerAxis()-joystick.GetRightTriggerAxis() ) ;
+    return  ( joystick.GetRightTriggerAxis()-joystick.GetLeftTriggerAxis() ) ;
   }
 
   inline double TURN_AXIS()
   {
-    return joystick.GetLeftY();
+    return joystick.GetLeftX();
   }
 
   inline bool INTAKE_IN()

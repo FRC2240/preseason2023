@@ -22,7 +22,7 @@ namespace CONSTANTS
     namespace CLIMBER 
     {
         constexpr double MAX_CLIMBER_UP = 1000.0, MAX_CLIMBER_DOWN = 0.0;
-        constexpr int MOTOR_ID = 7;
+        constexpr int MOTOR_ID = 9;
         constexpr int ENCODER_A = 1, ENCODER_B = 0;
     }
     namespace ELEVATOR
