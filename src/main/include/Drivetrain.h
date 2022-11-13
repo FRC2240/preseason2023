@@ -6,8 +6,7 @@
 
 #include <frc/DriverStation.h>
 #include <frc/Encoder.h>
-#include <frc/PWMVictorSPX.h>
-#include <frc/SpeedControllerGroup.h>
+#include <frc/motorcontrol/MotorControllerGroup.h>
 #include <frc/controller/PIDController.h>
 #include <frc/controller/SimpleMotorFeedforward.h>
 #include <frc/kinematics/DifferentialDriveKinematics.h>
@@ -18,7 +17,7 @@
 #include <units/time.h>
 #include <units/velocity.h>
 #include <units/voltage.h>
-#include <wpi/math>
+#include <wpi/numbers>
 
 #include "rev/CANSparkMax.h"
 #include "AHRS.h"
@@ -29,10 +28,10 @@
 class Drivetrain {
  public:
   Drivetrain(
-      frc::SpeedControllerGroup* leftGroup,
-      frc::SpeedControllerGroup* rightGroup,
-      rev::CANEncoder* leftEncoder,
-      rev::CANEncoder* rightEncoder
+      frc::MotorControllerGroup* leftGroup,
+      frc::MotorControllerGroup* rightGroup,
+      rev::SparkMaxRelativeEncoder* leftEncoder,
+      rev::SparkMaxRelativeEncoder* rightEncoder
       ) :
   m_leftGroup(leftGroup),
   m_rightGroup(rightGroup),
@@ -58,11 +57,9 @@ class Drivetrain {
 		} catch (std::exception& ex ) {
 			std::string err_string = "Error instantiating navX MXP:  ";
 			err_string += ex.what();
-			frc::DriverStation::ReportError(err_string.c_str());
 		}
     
     m_odometry = new frc::DifferentialDriveOdometry(m_gyro->GetRotation2d());
-    std::cout << "DriveTrain pose " << m_odometry->GetPose().Rotation().Degrees() << std::endl;
   }
 
   void SetSpeeds(const frc::DifferentialDriveWheelSpeeds& speeds);
@@ -83,11 +80,11 @@ class Drivetrain {
   units::meter_t kTrackWidth = 0.657_m;                        // measured    
   double kDistancePerEncoderRotation = 0.0387;                 // measured (meters)  
 
-  frc::SpeedControllerGroup* m_leftGroup;
-  frc::SpeedControllerGroup* m_rightGroup;
+  frc::MotorControllerGroup* m_leftGroup;
+  frc::MotorControllerGroup* m_rightGroup;
 
-  rev::CANEncoder* m_leftEncoder;
-  rev::CANEncoder* m_rightEncoder;
+  rev::SparkMaxRelativeEncoder* m_leftEncoder;
+  rev::SparkMaxRelativeEncoder* m_rightEncoder;
 
   frc2::PIDController m_leftPIDController{kP, 0.0, 0.0};
   frc2::PIDController m_rightPIDController{kP, 0.0, 0.0};
