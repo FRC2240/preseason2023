@@ -1,0 +1,9 @@
+{
+  "lengthUnit": "Inch",
+  "exportUnit": "Same as Project",
+  "maxVelocity": 96.0,
+  "maxAcceleration": 36.0,
+  "trackWidth": 27.0,
+  "gameName": "FIRST Power Up",
+  "outputDir": ""
+}
