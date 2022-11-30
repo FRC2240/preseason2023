@@ -8,6 +8,7 @@ public:
     Elevator();
     void Up(double speed);
     void Down(double speed);
+    void Stop();
     void SoftLimits();
     void test();
 private:
