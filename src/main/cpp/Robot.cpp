@@ -77,6 +77,10 @@ void Robot::TeleopPeriodic() {
     m_elevator.Down(BUTTON::ELEVATOR_AXIS() );
   }
 
+  else {
+    m_elevator.Stop();
+  }
+
 
 if ( BUTTON::CLIMBER_UP() )
 {

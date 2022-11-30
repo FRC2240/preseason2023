@@ -17,6 +17,10 @@ void Elevator::Down(double speed)
         m_motor_elevator_left.Set(speed);
   
 }
+void Elevator::Stop()
+{
+        m_motor_elevator_left.Set(0.0);
+}
 void Elevator::SoftLimits() 
 {
     m_motor_elevator_left.EnableSoftLimit(rev::CANSparkMax::SoftLimitDirection::kForward, true);
