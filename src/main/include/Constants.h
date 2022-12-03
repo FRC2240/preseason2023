@@ -8,8 +8,8 @@ namespace CONSTANTS
      namespace GRABBER 
      {
          
-         constexpr int SPIN_MOTOR_ID_WRIST = 7;
-         constexpr int SPIN_MOTOR_ID_SPIN = 8;
+         constexpr int SPIN_MOTOR_ID_WRIST = 8;
+         constexpr int SPIN_MOTOR_ID_SPIN = 7;
      }
 
     namespace DRIVE

@@ -8,9 +8,10 @@ class Climber {
 public:
 Climber();
 
-void SoftLimits();
+// void SoftLimits();
 void Up();
 void Down();
+void Stop();
 
 private:
 frc::Encoder m_ClimberEncoder{CONSTANTS::CLIMBER::ENCODER_A, 
