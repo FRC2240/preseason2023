@@ -5,7 +5,7 @@ Elevator::Elevator()
 {
     m_motor_elevator_left.RestoreFactoryDefaults();
     m_motor_elevator_right.RestoreFactoryDefaults();
-    SoftLimits();
+    //SoftLimits();
     m_motor_elevator_right.Follow(m_motor_elevator_left, true);
 } 
 void Elevator::Up(double speed) 

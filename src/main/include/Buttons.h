@@ -48,7 +48,7 @@ namespace BUTTON
 
   inline bool CLIMBER_UP()
   {
-    if (joystick.GetPOV() >= 315.0 && joystick.GetPOV() <= 45.0)
+    if (joystick.GetPOV() == 0)
       {
         return true;
       }
@@ -60,7 +60,7 @@ namespace BUTTON
 
   inline bool CLIMBER_DOWN()
   {
-    if (!BUTTON::CLIMBER_UP())
+    if (joystick.GetPOV() <= 225 && joystick.GetPOV() >= 135)
       {
         return true;
       }

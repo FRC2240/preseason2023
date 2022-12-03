@@ -10,7 +10,7 @@ Grabber::STATES Grabber::Logic(
     {
       //Grabber::Down();
     }
-  else if (!left_limit_switch.Get() && right_limit_switch.Get() )
+  else if (!left_limit_switch.Get() && !right_limit_switch.Get() )
     {
       //Grabber::Up();
     }

@@ -14,8 +14,8 @@ public:
 
   STATES Logic(bool intake_button, bool eject_button);
 
-  frc::DigitalInput left_limit_switch{9};
-  frc::DigitalInput right_limit_switch{10};
+  frc::DigitalInput left_limit_switch{3};
+  frc::DigitalInput right_limit_switch{2};
         
   private:
 
@@ -25,8 +25,8 @@ public:
   STATES last_state = NOTHING;
 
   //Needs 2 motor
-  rev::CANSparkMax m_motor_grabber_spin{7, rev::CANSparkMax::MotorType::kBrushless};
-  rev::CANSparkMax m_motor_grabber_wrist{8, rev::CANSparkMax::MotorType::kBrushless};
+ rev::CANSparkMax m_motor_grabber_spin{8, rev::CANSparkMax::MotorType::kBrushless};
+ rev::CANSparkMax m_motor_grabber_wrist{7, rev::CANSparkMax::MotorType::kBrushless}; 
 
   //PIDs
   rev::SparkMaxPIDController m_grabber_wrist_PIDController = m_motor_grabber_wrist.GetPIDController();
