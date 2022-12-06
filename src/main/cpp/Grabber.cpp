@@ -1,120 +1,122 @@
-#include <Grabber.h>
+#include "Grabber.h"
 
 Grabber::STATES Grabber::Logic(
                                bool intake_button,
-                               bool eject_button
+                               bool extake_button
                                )
   /// Returns the current state of the machine at the end of the cycle
 {
-  if ( left_limit_switch.Get() || right_limit_switch.Get() )
+  
+  switch (state)
     {
-      //Grabber::Down();
+      case 1:
+        if (intake_button )
+        {
+          Down();
+          In();
+          state = 2;
+        }
+
+      break;
+      
+      case 2:
+
+        if (extake_button)
+        {
+          state = 6;
+        } 
+
+        else if (!left_limit_switch.Get() || !right_limit_switch.Get())
+        {
+          m_grabber_timer.Reset();
+          m_grabber_timer.Start();
+          state = 3;
+        }
+
+
+
+      break;
+
+      case 3:
+
+        if ((m_grabber_timer.Get() > units::time::second_t(0.5) && m_grabber_timer.Get() < units::time::second_t(1)) && (!left_limit_switch.Get() || !right_limit_switch.Get()))
+        {
+          m_grabber_timer.Stop();
+          Stop();
+          state = 4;
+        } 
+        else if (m_grabber_timer.Get() > units::time::second_t(1))
+        {
+          m_grabber_timer.Stop();
+          state = 2;
+        }
+      break;
+
+      case 4:
+
+        if (extake_button)
+        {
+          Out();
+          m_grabber_timer.Reset();
+          m_grabber_timer.Start();
+          state = 5;
+        } 
+        else if(intake_button) 
+        {
+          In();
+          state = 2;
+        }
+
+      break;
+
+      case 5:
+
+        if (m_grabber_timer.Get() > units::time::second_t(0.5))
+        {
+          Stop();
+          Up();
+          m_grabber_timer.Stop();
+          state = 1;
+        }
+      
+      break;
+
+      case 6:
+
+        m_grabber_timer.Reset();
+        m_grabber_timer.Start();
+        if (m_grabber_timer.Get() > units::time::second_t(0.5))
+        {
+          Stop();
+          m_grabber_timer.Stop();
+          state = 4;
+        }
+        
     }
-  else if (!left_limit_switch.Get() && !right_limit_switch.Get() )
-    {
-      //Grabber::Up();
-    }
-
-  switch (last_state)
-    {
-  case INTAKING:
-    if (intake_button &&
-        (!left_limit_switch.Get() || !right_limit_switch.Get() ) )
-      {
-        //Grabber::Down();
-        Grabber::In();
-        last_state = INTAKING;
-        return INTAKING;
-      }
-    else if (intake_button &&
-             (left_limit_switch.Get() || right_limit_switch.Get() ) )
-      {
-        //Grabber::Down();
-        m_motor_grabber_spin.Set(0.0);
-        last_state = NOTHING;
-        return NOTHING;
-      }
-    else
-      {
-        last_state = NOTHING;
-        return NOTHING;
-        // Do nothing at all.
-      }
-    break;
-
-  case EJECTING:
-    if (eject_button)
-      {
-       Grabber::Out();
-
-       last_state = EJECTING;
-       return EJECTING;
-      }
-    else
-      {
-        last_state = NOTHING;
-        return NOTHING;
-      }
-    break;
-
-  case NOTHING:
-    if (left_limit_switch.Get() && right_limit_switch.Get() )
-      {
-        //Grabber::Up();
-        last_state = NOTHING;
-        return NOTHING;
-      }
-    else if (intake_button &&
-             !left_limit_switch.Get() &&
-             !right_limit_switch.Get() )
-      {
-        //Grabber::Down();
-        Grabber::In();
-        last_state = INTAKING;
-        return INTAKING;
-      }
-    else if (eject_button)
-      {
-        Grabber::Out();
-        last_state = EJECTING;
-        return EJECTING;
-      }
-
-    else
-      {
-        //Grabber::Down();
-        last_state = NOTHING;
-        return NOTHING;
-      }
-    break;
-  }
-  last_state = NOTHING;
-  return NOTHING;
 }
-/* 
-void Grabber::Up(){
-if (m_Grabber.ende
-}
-void Grabber::Down(){
-if (m_Grabber.)
-}
-*/
+
+void Grabber::Up()
+{}
+
+void Grabber::Down() 
+{}
 
 
 void Grabber::In()
 {
-
-//Grabber Spining In//
-m_motor_grabber_spin.Set(-0.5);
-
+  //Grabber Spining In//
+  m_motor_grabber_spin.Set(-0.5);
 }
 
 void Grabber::Out()
 {
+  //Grabber Spining Out//
+  m_motor_grabber_spin.Set(0.5);
+}
 
-//Grabber Spining Out//
-m_motor_grabber_spin.Set(0.5);
-
+void Grabber::Stop()
+{
+  m_motor_grabber_spin.Set(0.0);
 }
 
 void Grabber::GrabberPIDInit() {

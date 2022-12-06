@@ -7,48 +7,53 @@
 namespace BUTTON
 {
   // Declare controler in namespace
-  frc::XboxController joystick {0};
+  frc::XboxController stick {0};
 
   // Define all operations as inline functions
 
-  inline bool GRABBER_TOGGLE()
+  inline bool GRABBER_INTAKE()
   {
-      return joystick.GetYButton();
+      return stick.GetLeftBumperReleased();
+  }
+
+  inline bool GRABBER_EXTAKE()
+  {
+    return stick.GetRightBumperReleased();
   }
 
   inline double ELEVATOR_AXIS()
   {
-     return joystick.GetRightY();
+     return stick.GetRightY();
   }
 
   inline double THROTTLE_AXIS()
   {
-    return  ( joystick.GetRightTriggerAxis()-joystick.GetLeftTriggerAxis() ) ;
+    return  ( stick.GetRightTriggerAxis()-stick.GetLeftTriggerAxis() ) ;
   }
 
   inline double TURN_AXIS()
   {
-    return joystick.GetLeftX();
+    return stick.GetLeftX();
   }
 
   inline bool INTAKE_IN()
   {
-    return joystick.GetLeftBumper();
+    return stick.GetLeftBumper();
   }
 
   inline bool INTAKE_OUT()
   {
-    return joystick.GetRightBumper();
+    return stick.GetRightBumper();
   }
 
   inline bool WRIST_TOGGLE()
   {
-    return joystick.GetRightBumper();
+    return stick.GetRightBumper();
   }
 
   inline bool CLIMBER_UP()
   {
-    if (joystick.GetPOV() == 0)
+    if (stick.GetPOV() == 0)
       {
         return true;
       }
@@ -60,7 +65,7 @@ namespace BUTTON
 
   inline bool CLIMBER_DOWN()
   {
-    if (joystick.GetPOV() <= 225 && joystick.GetPOV() >= 135)
+    if (stick.GetPOV() <= 225 && stick.GetPOV() >= 135)
       {
         return true;
       }
