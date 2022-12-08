@@ -67,14 +67,14 @@ void Robot::TeleopPeriodic() {
 
   m_drive.drivetrain.ArcadeDrive(BUTTON::THROTTLE_AXIS(), BUTTON::TURN_AXIS());
 
-  if (BUTTON::ELEVATOR_AXIS() > 0.3) {
+  if (BUTTON::ELEVATOR_AXIS() > 0.1) {
     std::cout << "here" << "\n";
 
-    m_elevator.Up(BUTTON::ELEVATOR_AXIS() );
+    m_elevator.Up(-0.2 );
   }
 
   else if (BUTTON::ELEVATOR_AXIS() < -0.1) {
-    m_elevator.Down(BUTTON::ELEVATOR_AXIS() );
+    m_elevator.Down(0.4 );
   }
 
   else {
@@ -109,7 +109,7 @@ else {
     m_grabber.Out();
   }
 */
-  m_grabber.Logic(BUTTON::GRABBER_INTAKE(), BUTTON::GRABBER_EXTAKE());
+  m_grabber.Logic(BUTTON::GRABBER_INTAKE(), BUTTON::GRABBER_EXTAKE(), BUTTON::GRABBER_STORE, BUTTON::GRBBER_IGNORE);
 
 
 }

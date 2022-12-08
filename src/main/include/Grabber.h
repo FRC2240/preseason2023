@@ -3,7 +3,7 @@
 #include <frc/Timer.h>
 
 class Grabber {
-private:  enum STATES {INTAKING, EJECTING, NOTHING};
+private:  enum STATES {STOWED, INTAKING, INTAKE_WAIT, INTAKE_STOP, EXTAKING, OVERIDE_WAIT};
 
 public:
 
@@ -14,18 +14,15 @@ public:
   void Stop();
   void GrabberPIDInit();
 
-  STATES Logic(bool intake_button, bool extake_button);
+  STATES Logic(bool intake_button, bool extake_button, bool store_button, bool ignore_button);
 
   frc::DigitalInput left_limit_switch{3};
   frc::DigitalInput right_limit_switch{2};
         
   private:
 
-  bool full;
-  bool stowed;
   int state = 1;
 
-  STATES last_state = NOTHING;
 
   //Needs 2 motor
  rev::CANSparkMax m_motor_grabber_spin{8, rev::CANSparkMax::MotorType::kBrushless};

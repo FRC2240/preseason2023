@@ -1,96 +1,138 @@
+#include <iostream>
 #include "Grabber.h"
 
 Grabber::STATES Grabber::Logic(
                                bool intake_button,
-                               bool extake_button
+                               bool extake_button,
+                               bool store_button,
+                               bool ignore_button
                                )
   /// Returns the current state of the machine at the end of the cycle
 {
+
+  if (store_button)
+  {
+    state = STOWED;
+    std::cout << "stowed button\n";
+  }
   
   switch (state)
     {
-      case 1:
+      case STOWED:
+        std::cout << "stowed\n";
+
+        Up();
+        Stop();
+
         if (intake_button )
         {
           Down();
           In();
-          state = 2;
+          state = INTAKING;
+        }
+        else if(extake_button)
+        {
+          Out();
+          state = EXTAKING;
         }
 
       break;
       
-      case 2:
+      case INTAKING:
+      std::cout << "intaking\n";
+
+        Down();
+        In();
 
         if (extake_button)
         {
-          state = 6;
+          m_grabber_timer.Reset();
+          m_grabber_timer.Start();
+          state = OVERIDE_WAIT;
         } 
 
-        else if (!left_limit_switch.Get() || !right_limit_switch.Get())
+        else if ((!left_limit_switch.Get() || !right_limit_switch.Get()) && !ignore_button)
         {
           m_grabber_timer.Reset();
           m_grabber_timer.Start();
-          state = 3;
+          state = INTAKE_WAIT;
         }
-
-
 
       break;
 
-      case 3:
+      case INTAKE_WAIT:
+      std::cout << "intake wait\n";
 
-        if ((m_grabber_timer.Get() > units::time::second_t(0.5) && m_grabber_timer.Get() < units::time::second_t(1)) && (!left_limit_switch.Get() || !right_limit_switch.Get()))
+        Down();
+        In();
+
+        if ((m_grabber_timer.Get() > units::time::second_t(0.5) && m_grabber_timer.Get() < units::time::second_t(1)) 
+            && (!left_limit_switch.Get() || !right_limit_switch.Get()))
+
         {
           m_grabber_timer.Stop();
           Stop();
-          state = 4;
+          state = INTAKE_STOP;
         } 
         else if (m_grabber_timer.Get() > units::time::second_t(1))
         {
           m_grabber_timer.Stop();
-          state = 2;
+          state = INTAKING;
         }
+
       break;
 
-      case 4:
+      case INTAKE_STOP:
+      std::cout << "intake stop\n";
+
+        Down();
+        Stop();
 
         if (extake_button)
         {
           Out();
           m_grabber_timer.Reset();
           m_grabber_timer.Start();
-          state = 5;
+          state = EXTAKING;
         } 
         else if(intake_button) 
         {
           In();
-          state = 2;
+          state = INTAKING;
         }
 
       break;
 
-      case 5:
+      case EXTAKING:
+      std::cout << "extaking\n";
+
+        Down();
+        Out();
 
         if (m_grabber_timer.Get() > units::time::second_t(0.5))
         {
           Stop();
           Up();
           m_grabber_timer.Stop();
-          state = 1;
-        }
+          state = STOWED;
+        } 
       
       break;
 
-      case 6:
+      case OVERIDE_WAIT:
+      std::cout << "overide wait\n";
 
-        m_grabber_timer.Reset();
-        m_grabber_timer.Start();
+        Down();
+        In();
+
         if (m_grabber_timer.Get() > units::time::second_t(0.5))
         {
           Stop();
           m_grabber_timer.Stop();
-          state = 4;
+          state = INTAKE_STOP;
         }
+
+      break;
         
     }
 }
@@ -105,13 +147,13 @@ void Grabber::Down()
 void Grabber::In()
 {
   //Grabber Spining In//
-  m_motor_grabber_spin.Set(-0.5);
+  m_motor_grabber_spin.Set(0.5);
 }
 
 void Grabber::Out()
 {
   //Grabber Spining Out//
-  m_motor_grabber_spin.Set(0.5);
+  m_motor_grabber_spin.Set(-0.5);
 }
 
 void Grabber::Stop()
