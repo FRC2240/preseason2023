@@ -21,6 +21,16 @@ namespace BUTTON
     return stick.GetRightBumperReleased();
   }
 
+  inline bool GRABBER_STORE()
+  {
+    return stick.GetAButtonPressed();
+  }
+
+  inline bool GRBBER_IGNORE()
+  {
+    return stick.GetYButtonPressed();
+  }
+
   inline double ELEVATOR_AXIS()
   {
      return stick.GetRightY();
