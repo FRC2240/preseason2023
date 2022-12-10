@@ -11,6 +11,10 @@ public:
     void Stop();
     void SoftLimits();
     void test();
+    void ElevatorPIDInit();
+    void InitializeDashboard();
+    void ReadDashboard();
+
 private:
 
     double max_up = CONSTANTS::ELEVATOR::MAX_ELEVATOR_UP, max_down = CONSTANTS::ELEVATOR::MAX_ELEVATOR_DOWN;
@@ -19,4 +23,18 @@ private:
     rev::CANSparkMax m_motor_elevator_left{CONSTANTS::ELEVATOR::LEFT_MOTOR_ID, rev::CANSparkMax::MotorType::kBrushless};
     rev::CANSparkMax m_motor_elevator_right{CONSTANTS::ELEVATOR::RIGHT_MOTOR_ID, rev::CANSparkMax::MotorType::kBrushless};
     rev::SparkMaxRelativeEncoder m_encoder = m_motor_elevator_left.GetEncoder();
+
+    //Elevator PID
+    rev::SparkMaxPIDController m_left_elevatorPIDController = m_motor_elevator_left.GetPIDController();
+    rev::SparkMaxPIDController m_right_elevatorPIDController = m_motor_elevator_right.GetPIDController();
+
+
+      struct pidCoeff
+  {
+    double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput;
+  }; 
+
+    pidCoeff m_left_elevator_coeff{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+    pidCoeff m_right_elevator_coeff{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+
 };
