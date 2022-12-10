@@ -1,6 +1,7 @@
 #ifndef BUTTONS_H_
 #define BUTTONS_H_
 
+#include <iostream>
 #include <frc/XboxController.h>
 
 // Seperate all buttons into a namespace
@@ -23,12 +24,12 @@ namespace BUTTON
 
   inline bool GRABBER_STORE()
   {
-    return stick.GetAButtonPressed();
+    return stick.GetAButton();
   }
 
   inline bool GRBBER_IGNORE()
   {
-    return stick.GetYButtonPressed();
+    return stick.GetYButton();
   }
 
   inline double ELEVATOR_AXIS()

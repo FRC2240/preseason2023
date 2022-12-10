@@ -16,6 +16,7 @@ public:
   void GrabberPIDInit();
   void GrabberDashboardInit();
   void GrabberReadDashboard();
+  void Test();
 
   STATES Logic(bool intake_button, bool extake_button, bool store_button, bool ignore_button);
 
@@ -29,7 +30,8 @@ public:
 
   //Needs 2 motor
  rev::CANSparkMax m_motor_grabber_spin{8, rev::CANSparkMax::MotorType::kBrushless};
- rev::CANSparkMax m_motor_grabber_wrist{7, rev::CANSparkMax::MotorType::kBrushless}; 
+ rev::CANSparkMax m_motor_grabber_wrist{7, rev::CANSparkMax::MotorType::kBrushless};
+ rev::SparkMaxRelativeEncoder m_encoder = m_motor_grabber_wrist.GetEncoder(); 
 
  frc::Timer m_grabber_timer;
 
