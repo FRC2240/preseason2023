@@ -1,6 +1,7 @@
 #include "rev/CANSparkMax.h"
 #include <frc/Encoder.h>
 #include "Constants.h"
+#include "frc/smartdashboard/SmartDashboard.h"
 
 class Elevator {
  
