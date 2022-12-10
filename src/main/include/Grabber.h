@@ -13,6 +13,8 @@ public:
   void Out();
   void Stop();
   void GrabberPIDInit();
+  void GrabberDashboardInit();
+  void GrabberReadDashboard();
 
   STATES Logic(bool intake_button, bool extake_button, bool store_button, bool ignore_button);
 

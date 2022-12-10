@@ -10,6 +10,9 @@ Grabber::STATES Grabber::Logic(
   /// Returns the current state of the machine at the end of the cycle
 {
 
+  Grabber::GrabberPIDInit();
+  Grabber::GrabberDashboardInit();
+
   if (store_button)
   {
     state = STOWED;
@@ -162,6 +165,9 @@ void Grabber::Stop()
 }
 
 void Grabber::GrabberPIDInit() {
+
+  Grabber::GrabberReadDashboard();
+
   m_grabber_wrist_PIDController.SetP(m_grabber_wrist_Coeff.kP);
   m_grabber_wrist_PIDController.SetI(m_grabber_wrist_Coeff.kI);
   m_grabber_wrist_PIDController.SetD(m_grabber_wrist_Coeff.kD);
@@ -170,3 +176,22 @@ void Grabber::GrabberPIDInit() {
   m_grabber_wrist_PIDController.SetOutputRange(m_grabber_wrist_Coeff.kMinOutput, m_grabber_wrist_Coeff.kMaxOutput);
 }
 
+void Grabber::GrabberDashboardInit()
+{
+    frc::SmartDashboard::PutNumber("Grabber P Gain", m_grabber_wrist_Coeff.kP);
+    frc::SmartDashboard::PutNumber("Grabber I Gain", m_grabber_wrist_Coeff.kI);
+    frc::SmartDashboard::PutNumber("Grabber D Gain", m_grabber_wrist_Coeff.kD);
+    frc::SmartDashboard::PutNumber("Grabber FF Gain", m_grabber_wrist_Coeff.kFF);
+    frc::SmartDashboard::PutNumber("Grabber Max Output", m_grabber_wrist_Coeff.kMaxOutput);
+    frc::SmartDashboard::PutNumber("Grabber Min Output", m_grabber_wrist_Coeff.kMinOutput);
+}
+
+void Grabber::GrabberReadDashboard()
+{
+    m_grabber_wrist_Coeff .kP = frc::SmartDashboard::GetNumber("Grabber P Gain", 0.0);
+    m_grabber_wrist_Coeff .kI = frc::SmartDashboard::GetNumber("Grabber I Gain", 0.0);
+    m_grabber_wrist_Coeff .kD = frc::SmartDashboard::GetNumber("Grabber D Gain", 0.0);
+    m_grabber_wrist_Coeff .kFF = frc::SmartDashboard::GetNumber("Grabber FF Gain", 0.0);
+    m_grabber_wrist_Coeff .kMinOutput = frc::SmartDashboard::GetNumber("Grabber Min Output", -1.0);
+    m_grabber_wrist_Coeff .kMaxOutput = frc::SmartDashboard::GetNumber("Grabber Mtput", 1.0);
+}

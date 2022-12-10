@@ -3,6 +3,8 @@
 #include "frc/smartdashboard/SmartDashboard.h"
 Elevator::Elevator()
 {
+    Elevator::ElevatorPIDInit();
+    Elevator::ElevatorDashboardInit();
     m_motor_elevator_left.RestoreFactoryDefaults();
     m_motor_elevator_right.RestoreFactoryDefaults();
     //SoftLimits();
@@ -22,19 +24,22 @@ void Elevator::Stop()
         m_motor_elevator_left.Set(0.0);
 }
 void Elevator::ElevatorPIDInit() {
-    m_left_elevatorPIDController.SetP(m_left_elevator_coeff.kP);
-  m_left_elevatorPIDController.SetI(m_left_elevator_coeff.kI);
-  m_left_elevatorPIDController.SetD(m_left_elevator_coeff.kD);
-  m_left_elevatorPIDController.SetIZone(m_left_elevator_coeff.kIz);
-  m_left_elevatorPIDController.SetFF(m_left_elevator_coeff.kFF);
-  m_left_elevatorPIDController.SetOutputRange(m_left_elevator_coeff.kMinOutput, m_left_elevator_coeff.kMaxOutput);
 
-   m_right_elevatorPIDController.SetP(m_right_elevator_coeff.kP);
-  m_right_elevatorPIDController.SetI(m_right_elevator_coeff.kI);
-  m_right_elevatorPIDController.SetD(m_right_elevator_coeff.kD);
-  m_right_elevatorPIDController.SetIZone(m_right_elevator_coeff.kIz);
-  m_right_elevatorPIDController.SetFF(m_right_elevator_coeff.kFF);
-  m_right_elevatorPIDController.SetOutputRange(m_right_elevator_coeff.kMinOutput, m_right_elevator_coeff.kMaxOutput);
+    Elevator::ElevatorReadDashboard();
+
+    m_left_elevatorPIDController.SetP(m_left_elevator_coeff.kP);
+    m_left_elevatorPIDController.SetI(m_left_elevator_coeff.kI);
+    m_left_elevatorPIDController.SetD(m_left_elevator_coeff.kD);
+    m_left_elevatorPIDController.SetIZone(m_left_elevator_coeff.kIz);
+    m_left_elevatorPIDController.SetFF(m_left_elevator_coeff.kFF);
+    m_left_elevatorPIDController.SetOutputRange(m_left_elevator_coeff.kMinOutput, m_left_elevator_coeff.kMaxOutput);
+
+    m_right_elevatorPIDController.SetP(m_right_elevator_coeff.kP);
+    m_right_elevatorPIDController.SetI(m_right_elevator_coeff.kI);
+    m_right_elevatorPIDController.SetD(m_right_elevator_coeff.kD);
+    m_right_elevatorPIDController.SetIZone(m_right_elevator_coeff.kIz);
+    m_right_elevatorPIDController.SetFF(m_right_elevator_coeff.kFF);
+    m_right_elevatorPIDController.SetOutputRange(m_right_elevator_coeff.kMinOutput, m_right_elevator_coeff.kMaxOutput);
 }
 void Elevator::SoftLimits() 
 {
@@ -45,7 +50,7 @@ void Elevator::SoftLimits()
 
 } 
 
-void Elevator::InitializeDashboard()
+void Elevator::ElevatorDashboardInit()
 {
     frc::SmartDashboard::PutNumber("Left Elevator P Gain", m_left_elevator_coeff.kP);
     frc::SmartDashboard::PutNumber("Left Elevator I Gain", m_left_elevator_coeff.kI);
@@ -62,7 +67,7 @@ void Elevator::InitializeDashboard()
     frc::SmartDashboard::PutNumber("Right Elevator Min Output", m_right_elevator_coeff.kMinOutput);
 }
 
-void Elevator::ReadDashboard()
+void Elevator::ElevatorReadDashboard()
 {
     m_left_elevator_coeff .kP = frc::SmartDashboard::GetNumber("Left Elevator P Gain", 0.0);
     m_left_elevator_coeff .kI = frc::SmartDashboard::GetNumber("Left Elevator I Gain", 0.0);
@@ -76,7 +81,7 @@ void Elevator::ReadDashboard()
     m_right_elevator_coeff  .kD = frc::SmartDashboard::GetNumber("Right Elevator D Gain", 0.0);
     m_right_elevator_coeff  .kFF = frc::SmartDashboard::GetNumber("Right Elevator FF Gain", 0.0);
     m_right_elevator_coeff  .kMinOutput = frc::SmartDashboard::GetNumber("Right Elevator Min Output", -1.0);
-    m_left_elevator_coeff .kMaxOutput = frc::SmartDashboard::GetNumber("Right Elevator Mtput", 1.0);
+    m_right_elevator_coeff .kMaxOutput = frc::SmartDashboard::GetNumber("Right Elevator Mtput", 1.0);
 }
 
 void Elevator::test() 

@@ -12,8 +12,8 @@ public:
     void SoftLimits();
     void test();
     void ElevatorPIDInit();
-    void InitializeDashboard();
-    void ReadDashboard();
+    void ElevatorDashboardInit();
+    void ElevatorReadDashboard();
 
 private:
 
