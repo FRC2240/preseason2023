@@ -1,6 +1,7 @@
 #include "rev/CANSparkMax.h"
 #include <frc/Encoder.h>
 #include "Constants.h"
+#include "frc/smartdashboard/SmartDashboard.h"
 
 class Elevator {
  
@@ -12,8 +13,8 @@ public:
     void SoftLimits();
     void test();
     void ElevatorPIDInit();
-    void InitializeDashboard();
-    void ReadDashboard();
+    void ElevatorDashboardInit();
+    void ElevatorReadDashboard();
 
 private:
 
