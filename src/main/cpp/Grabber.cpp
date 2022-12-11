@@ -1,6 +1,10 @@
 #include <iostream>
 #include "Grabber.h"
 
+Grabber::Grabber(){
+  m_encoder.SetPosition(0.0);
+}
+
 Grabber::STATES Grabber::Logic(
                                bool intake_button,
                                bool extake_button,
@@ -11,12 +15,19 @@ Grabber::STATES Grabber::Logic(
 {
 
   Grabber::GrabberPIDInit();
-  Grabber::GrabberDashboardInit();
+  //Grabber::GrabberDashboardInit();
+  Grabber::Test();
 
   if (store_button)
   {
     state = STOWED;
-    std::cout << "stowed button\n";
+    // std::cout << "stowed button\n";
+  }
+
+  if (ignore_button)
+  {
+
+    // std::cout << "ignore button\n";
   }
   
   switch (state)
@@ -35,6 +46,8 @@ Grabber::STATES Grabber::Logic(
         }
         else if(extake_button)
         {
+          m_grabber_timer.Reset();
+          m_grabber_timer.Start();
           Out();
           state = EXTAKING;
         }
@@ -141,10 +154,14 @@ Grabber::STATES Grabber::Logic(
 }
 
 void Grabber::Up()
-{}
+{
+  m_grabber_wrist_PIDController.SetReference(0.0, rev::ControlType::kPosition);
+}
 
 void Grabber::Down() 
-{}
+{
+  m_grabber_wrist_PIDController.SetReference(12.0, rev::ControlType::kPosition);
+}
 
 
 void Grabber::In()
@@ -166,7 +183,7 @@ void Grabber::Stop()
 
 void Grabber::GrabberPIDInit() {
 
-  Grabber::GrabberReadDashboard();
+  //Grabber::GrabberReadDashboard();
 
   m_grabber_wrist_PIDController.SetP(m_grabber_wrist_Coeff.kP);
   m_grabber_wrist_PIDController.SetI(m_grabber_wrist_Coeff.kI);
@@ -194,4 +211,9 @@ void Grabber::GrabberReadDashboard()
     m_grabber_wrist_Coeff .kFF = frc::SmartDashboard::GetNumber("Grabber FF Gain", 0.0);
     m_grabber_wrist_Coeff .kMinOutput = frc::SmartDashboard::GetNumber("Grabber Min Output", -1.0);
     m_grabber_wrist_Coeff .kMaxOutput = frc::SmartDashboard::GetNumber("Grabber Mtput", 1.0);
+}
+
+void Grabber::Test() 
+{
+    std::cout << "encoder: " << m_encoder.GetPosition() << "\n";
 }
