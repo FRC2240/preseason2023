@@ -8,6 +8,8 @@ private:  enum STATES {STOWED, INTAKING, INTAKE_WAIT, INTAKE_STOP, EXTAKING, OVE
 
 public:
 
+  Grabber();
+
   void Up();
   void Down();
   void In();
@@ -25,7 +27,7 @@ public:
         
   private:
 
-  int state = 1;
+  STATES state = STOWED;
 
 
   //Needs 2 motor
@@ -43,7 +45,7 @@ public:
     double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput;
   };
 
-  pidCoeff m_grabber_wrist_Coeff{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+  pidCoeff m_grabber_wrist_Coeff{0.08, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 
 };
 

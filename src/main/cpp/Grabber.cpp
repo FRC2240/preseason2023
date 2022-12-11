@@ -1,6 +1,10 @@
 #include <iostream>
 #include "Grabber.h"
 
+Grabber::Grabber(){
+  m_encoder.SetPosition(0.0);
+}
+
 Grabber::STATES Grabber::Logic(
                                bool intake_button,
                                bool extake_button,
@@ -11,7 +15,7 @@ Grabber::STATES Grabber::Logic(
 {
 
   Grabber::GrabberPIDInit();
-  Grabber::GrabberDashboardInit();
+  //Grabber::GrabberDashboardInit();
   Grabber::Test();
 
   if (store_button)
@@ -151,12 +155,12 @@ Grabber::STATES Grabber::Logic(
 
 void Grabber::Up()
 {
-  //m_grabber_wrist_PIDController.SetReference(-13.2857, rev::ControlType::kPosition);
+  m_grabber_wrist_PIDController.SetReference(0.0, rev::ControlType::kPosition);
 }
 
 void Grabber::Down() 
 {
-  //m_grabber_wrist_PIDController.SetReference(0, rev::CANSparkMax::);
+  m_grabber_wrist_PIDController.SetReference(12.0, rev::ControlType::kPosition);
 }
 
 
@@ -179,7 +183,7 @@ void Grabber::Stop()
 
 void Grabber::GrabberPIDInit() {
 
-  Grabber::GrabberReadDashboard();
+  //Grabber::GrabberReadDashboard();
 
   m_grabber_wrist_PIDController.SetP(m_grabber_wrist_Coeff.kP);
   m_grabber_wrist_PIDController.SetI(m_grabber_wrist_Coeff.kI);
