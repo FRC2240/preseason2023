@@ -16,6 +16,11 @@ public:
     void ElevatorDashboardInit();
     void ElevatorReadDashboard();
  
+    rev::SparkMaxRelativeEncoder m_encoder = m_motor_elevator_left.GetEncoder();
+    
+    //Elevator PID
+    rev::SparkMaxPIDController m_left_elevatorPIDController = m_motor_elevator_left.GetPIDController();
+
 private:
  
     double max_up = CONSTANTS::ELEVATOR::MAX_ELEVATOR_UP, max_down = CONSTANTS::ELEVATOR::MAX_ELEVATOR_DOWN;
@@ -23,10 +28,8 @@ private:
     //Needs two motors
     rev::CANSparkMax m_motor_elevator_left{CONSTANTS::ELEVATOR::LEFT_MOTOR_ID, rev::CANSparkMax::MotorType::kBrushless};
     rev::CANSparkMax m_motor_elevator_right{CONSTANTS::ELEVATOR::RIGHT_MOTOR_ID, rev::CANSparkMax::MotorType::kBrushless};
-    rev::SparkMaxRelativeEncoder m_encoder = m_motor_elevator_left.GetEncoder();
  
-    //Elevator PID
-    rev::SparkMaxPIDController m_left_elevatorPIDController = m_motor_elevator_left.GetPIDController();
+    
  
  
       struct pidCoeff
