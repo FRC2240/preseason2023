@@ -2,7 +2,7 @@
 #include "Grabber.h"
  
 Grabber::Grabber(){
-  m_encoder.SetPosition(0.0);
+  //m_encoder.SetPosition(0.0);
 }
  
 Grabber::STATES Grabber::Logic(
@@ -200,5 +200,5 @@ void Grabber::GrabberReadDashboard()
  
 void Grabber::Test()
 {
-    std::cout << "encoder: " << m_encoder.GetPosition() << "\n";
+    //std::cout << "encoder: " << m_encoder.GetPosition() << "\n";
 }
