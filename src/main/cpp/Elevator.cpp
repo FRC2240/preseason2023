@@ -9,7 +9,7 @@ Elevator::Elevator()
     m_motor_elevator_right.RestoreFactoryDefaults();
     SoftLimits();
     m_motor_elevator_right.Follow(m_motor_elevator_left, true);
-    m_encoder.SetPosition(0.0);
+    //m_encoder.SetPosition(0.0);
 }
 void Elevator::Up(double speed)
 {
@@ -69,5 +69,5 @@ void Elevator::ElevatorReadDashboard()
  
 void Elevator::test()
 {
-    std::cout << "encoder: " << m_encoder.GetPosition() << "\n";
+    //std::cout << "encoder: " << m_encoder.GetPosition() << "\n";
 }

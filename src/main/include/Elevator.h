@@ -16,7 +16,7 @@ public:
     void ElevatorDashboardInit();
     void ElevatorReadDashboard();
  
-    rev::SparkMaxRelativeEncoder m_encoder = m_motor_elevator_left.GetEncoder();
+    //rev::SparkMaxRelativeEncoder m_encoder = m_motor_elevator_left.GetEncoder();
     
     //Elevator PID
     rev::SparkMaxPIDController m_left_elevatorPIDController = m_motor_elevator_left.GetPIDController();

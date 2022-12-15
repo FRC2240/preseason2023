@@ -33,7 +33,7 @@ public:
   //Needs 2 motor
  rev::CANSparkMax m_motor_grabber_spin{8, rev::CANSparkMax::MotorType::kBrushless};
  rev::CANSparkMax m_motor_grabber_wrist{7, rev::CANSparkMax::MotorType::kBrushless};
- rev::SparkMaxRelativeEncoder m_encoder = m_motor_grabber_wrist.GetEncoder(); 
+ //rev::SparkMaxRelativeEncoder m_encoder = m_motor_grabber_wrist.GetEncoder(); 
 
  frc::Timer m_grabber_timer;
 

@@ -76,9 +76,13 @@ void Robot::TeleopPeriodic() {
   else if (BUTTON::ELEVATOR_AXIS() < -0.1) {
     m_elevator.Down(0.4 );
   }
+
+  // else if (BUTTON::ELEVATOR_AXIS() < 0.1 && BUTTON::ELEVATOR_AXIS() > -0.1) {
+  //   m_elevator.m_left_elevatorPIDController.SetReference(m_elevator.m_encoder.GetPosition(), rev::ControlType::kPosition);
+  // }
  
-  else if (BUTTON::ELEVATOR_AXIS() < 0.1 && BUTTON::ELEVATOR_AXIS() > -0.1) {
-    m_elevator.m_left_elevatorPIDController.SetReference(m_elevator.m_encoder.GetPosition(), rev::ControlType::kPosition);
+  else {
+    m_elevator.Stop();
   }
  
  
